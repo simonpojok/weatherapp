@@ -1,4 +1,4 @@
-package me.simonpojok.presentation.base.exception
+package me.simonpojok.presentation.common.exception
 
 sealed class Error {
     object None : Error()

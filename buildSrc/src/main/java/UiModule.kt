@@ -26,6 +26,9 @@ object UiModule {
     private const val roomKtx = "androidx.room:room-ktx:2.4.2"
     private const val roomRuntime = "androidx.room:room-runtime:2.4.1"
     private const val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    private const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment_version}"
+    private const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav_version}"
+    private const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.nav_version}"
 
     // Test
     private const val junitJunit = "junit:junit:${Versions.junitJunit}"
@@ -66,6 +69,9 @@ object UiModule {
         add(lifecycleViewModel)
         add(lifecycleExtension)
         add(lifecycleReactiveStreams)
+        add(fragment)
+        add(navigationFragment)
+        add(navigationUi)
     }
 
     val uiTestImplementationLibraries = arrayListOf<String>().apply {

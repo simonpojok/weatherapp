@@ -1,4 +1,4 @@
-package me.simonpojok.presentation.base.mappers
+package me.simonpojok.presentation.common.mappers
 
 class PresentationMapperException(message: String, throwable: Throwable? = null) :
     Exception(message, throwable)

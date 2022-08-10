@@ -36,7 +36,7 @@ android {
 
 dependencies {
 
-//    implementation(project(":domain"))
+    implementation(project(":domain"))
     implementation(PresentationModule.presentationImplementationLibraries)
     testImplementation(PresentationModule.presentationTestImplementationLibraries)
     androidTestImplementation(PresentationModule.presentationAndroidTestImplementationLibraries)

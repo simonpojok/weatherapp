@@ -14,6 +14,8 @@ object Versions {
     const val lifecycleRuntimeKtx = "2.4.1"
     const val activityCompose = "1.4.0"
     const val hiltLifeCycleViewModel = "1.0.0-alpha03"
+    const val fragment_version = "1.5.2"
+    const val nav_version = "2.5.1"
 
 
 

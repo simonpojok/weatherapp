@@ -1,4 +1,4 @@
-package me.simonpojok.presentation.base
+package me.simonpojok.presentation.common
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

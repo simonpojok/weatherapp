@@ -1,19 +1,14 @@
-package me.simonpojok.presentation
+package me.simonpojok.presentation.common
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
-import me.simonpojok.presentation.base.DialogCommand
-import me.simonpojok.presentation.base.PresentationDestination
-import me.simonpojok.presentation.base.SingleLiveEvent
-import me.simonpojok.presentation.base.ViewState
-import me.simonpojok.presentation.base.exception.DomainException
-import me.simonpojok.presentation.base.exception.PresentationException
-import me.simonpojok.presentation.base.mappers.DomainToPresentationMapper
-import me.simonpojok.presentation.usecaseexecutor.UseCaseExecutorProvider
+import me.simonpojok.presentation.common.exception.DomainException
+import me.simonpojok.presentation.common.exception.PresentationException
+import me.simonpojok.presentation.common.mappers.DomainToPresentationMapper
+import me.simonpojok.presentation.common.usecaseexecutor.UseCaseExecutorProvider
 
 abstract class BaseViewModel<VIEW_STATE : ViewState, DIALOG_COMMAND : DialogCommand>(
     useCaseExecutorProvider: UseCaseExecutorProvider,
