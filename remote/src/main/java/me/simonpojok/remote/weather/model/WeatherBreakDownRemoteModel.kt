@@ -1,6 +1,6 @@
-package me.simonpojok.data.weather.model
+package me.simonpojok.remote.weather.model
 
-data class WeatherBreakDownApiModel(
+data class WeatherBreakDownRemoteModel(
     val temp: Double,
     val feels_like: Double,
     val temp_min: Double,

@@ -1,6 +1,6 @@
-package me.simonpojok.data.weather.model
+package me.simonpojok.remote.weather.model
 
-data class WeatherApiModel(
+data class WeatherRemoteModel(
     val id: Int,
     val main: String,
     val description: String,

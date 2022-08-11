@@ -1,6 +1,6 @@
-package me.simonpojok.data.weather.model
+package me.simonpojok.remote.weather.model
 
-data class SystemApiModel(
+data class SystemRemoteModel(
     val type: Int,
     val id: Int,
     val country: String,

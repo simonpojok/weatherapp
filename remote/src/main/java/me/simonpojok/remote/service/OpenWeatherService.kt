@@ -1,4 +1,4 @@
-package me.simonpojok.data.remote
+package me.simonpojok.remote.service
 
 import me.simonpojok.data.weather.model.AreaWeatherConditionDataModel
 import retrofit2.http.GET

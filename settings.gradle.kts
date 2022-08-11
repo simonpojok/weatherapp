@@ -13,7 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "WeatherApp"
-include(":app", ":presentation")
-include(":domain")
-include(":data")
-include(":authentication")
+include(":app", ":presentation", ":domain", ":data", ":authentication", ":remote", ":local")

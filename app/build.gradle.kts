@@ -67,6 +67,4 @@ dependencies {
     kapt(UiModule.uiKaptImplementationLibraries)
     androidTestImplementation(UiModule.uiAndroidTestImplementationLibraries)
     testImplementation(UiModule.uiTestImplementationLibraries)
-
-    debugImplementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
 }

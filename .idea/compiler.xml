@@ -6,7 +6,9 @@
       <module name="WeatherApp.authentication" target="11" />
       <module name="WeatherApp.buildSrc" target="11" />
       <module name="WeatherApp.data" target="11" />
+      <module name="WeatherApp.local" target="11" />
       <module name="WeatherApp.presentation" target="11" />
+      <module name="WeatherApp.remote" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
