@@ -9,7 +9,7 @@ class AreaWeatherConditionDataToAreaWeatherConditionDomainModelMapper(
     private val weatherDataModelToWeatherDomainModelMapper: WeatherDataModelToWeatherDomainModelMapper
 ) : DataToDomainMapper<AreaWeatherConditionDataModel, AreaWeatherConditionDomainModel>() {
     override fun map(input: AreaWeatherConditionDataModel) = AreaWeatherConditionDomainModel(
-        weather = weatherDataModelToWeatherDomainModelMapper.toDomain(input.weather),
+        weather = input.weather.map(weatherDataModelToWeatherDomainModelMapper::toDomain),
         main = weatherBreakDownDataModelToWeatherBreakDownDomainMapper.toDomain(input.main)
     )
 }

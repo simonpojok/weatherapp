@@ -100,20 +100,11 @@ object WeatherDataModule {
 
     @Provides
     fun providesAreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper(
-        coordinateRemoteMapper: CoordinateRemoteModelToCoordinateDataMapper,
         weatherRemoteMapper: WeatherRemoteModelToWeatherDataModelMapper,
         weatherBreakDataMapper: WeatherBreakDownRemoteModelToWeatherBreakDownDataMapper,
-        cloudsRemoteMapper: CloudsRemoteModelToCloudsDataModelMapper,
-        systemRemoteMapper: SystemRemoteModelToSystemDataModelMapper,
-        windRemoteMapper: WindRemoteModelToWindDataModelMapper
     ) =
         AreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper(
-            coordinateRemoteMapper,
-            weatherRemoteMapper,
-            weatherBreakDataMapper,
-            cloudsRemoteMapper,
-            systemRemoteMapper,
-            windRemoteMapper
+            weatherRemoteMapper, weatherBreakDataMapper
         )
 
     @Provides

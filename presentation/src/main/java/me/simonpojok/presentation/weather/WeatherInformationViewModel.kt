@@ -40,7 +40,9 @@ class WeatherInformationViewModel @Inject constructor(
             value = CoordinateDomainModel(lon, lat),
             useCase = getAreaWeatherInformationUseCase,
             callback = ::updateWeatherInformationState,
-            onError = { _ -> }
+            onError = { error ->
+                print(error.toString())
+            }
         )
     }
 
@@ -51,7 +53,7 @@ class WeatherInformationViewModel @Inject constructor(
             lastState.copy(
                 isLoading = false,
                 weather = weatherDomainToWeatherPresentationModelMapper.toPresentation(
-                    weatherInformation.weather
+                    weatherInformation.weather.last()
                 ),
                 weatherBreakDown = weatherBreakDownDomainToPresentationModelMapper.toPresentation(
                     weatherInformation.main

@@ -14,15 +14,12 @@ class WeatherInformationRemoteSource(
     private val areaWeatherConditionMapper: AreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper
 ) : RemoteWeatherDataSource {
     override suspend fun getAreaWeatherInformation(coord: CoordinateDataModel): AreaWeatherConditionDataModel {
-        try {
-            return openWeatherService.getCurrentWeatherData(
-                lat = coord.lat,
-                log = coord.lon,
-                apiKey = authenticationKeyProvider.getAuthenticationKey().apiKey
-            ).toData()
-        } catch (exception: Exception) {
-            throw exception
-        }
+        val query = mapOf(
+            "lat" to coord.lat.toString(),
+            "lon" to coord.lon.toString(),
+            "apiKey" to authenticationKeyProvider.getAuthenticationKey().apiKey
+        )
+        return openWeatherService.getCurrentWeatherData(query).toData()
     }
 
     private fun AreaWeatherConditionRemoteModel.toData() = areaWeatherConditionMapper.toData(this)

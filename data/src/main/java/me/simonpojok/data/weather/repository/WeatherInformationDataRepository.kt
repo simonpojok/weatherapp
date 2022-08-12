@@ -14,7 +14,6 @@ class WeatherInformationDataRepository(
     private val areaWeatherConditionDomainMapper: AreaWeatherConditionDataToAreaWeatherConditionDomainModelMapper
 ) : AreaWeatherInformationRepository {
     override suspend fun getAreaWeatherCondition(coordinateDomainModel: CoordinateDomainModel): AreaWeatherConditionDomainModel {
-        print("Calling .........................................................")
         return remoteWeatherDataSource.getAreaWeatherInformation(
             coordinateRemoteModelMapper.toData(coordinateDomainModel)
         ).toDomain()
