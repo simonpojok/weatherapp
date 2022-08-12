@@ -1,13 +1,19 @@
 package me.simonpojok.weatherapp.weather
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.LayoutRes
+import androidx.core.app.ActivityCompat.checkSelfPermission
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import me.simonpojok.presentation.common.DialogCommand
 import me.simonpojok.presentation.weather.WeatherInformationViewModel
@@ -38,6 +44,12 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
     private val forecastRecyclerView: RecyclerView get() = requireView().findViewById(R.id.weather_information_weekly_statistics_list)
 
     @Inject
+    lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    @Inject
+    lateinit var cancellationTokenSource: CancellationTokenSource
+
+    @Inject
     override lateinit var destinationMapper: WeatherInformationUiDestinationMapper
 
     override val viewModel: WeatherInformationViewModel by viewModels()
@@ -64,6 +76,7 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         forecastRecyclerView.adapter = forcastAdapter
+        requestCurrentLocationAndLoadData()
     }
 
     override fun renderViewState(viewState: WeatherInformationViewState) {
@@ -92,6 +105,29 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
         if (backgroundResources is WeatherResourceUiModel.Result) {
             backgroundView.setBackgroundColor(resources.getColor(backgroundResources.backgroundColor))
             weatherImageView.setImageResource(backgroundResources.headerImage)
+        }
+    }
+
+    private fun requestCurrentLocationAndLoadData() {
+        if (checkSelfPermission(requireContext(), ACCESS_FINE_LOCATION) == PERMISSION_GRANTED) {
+            val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
+                PRIORITY_HIGH_ACCURACY,
+                cancellationTokenSource.token
+            )
+
+            currentLocationTask.addOnCompleteListener { task: Task<Location> ->
+                if (task.isSuccessful) {
+                    viewModel.onGetWeatherInformationAction(
+                        lat = task.result.latitude,
+                        lon = task.result.longitude
+                    )
+
+                    viewModel.onGetWeeklyAreaWeatherForecast(
+                        lat = task.result.latitude,
+                        lon = task.result.longitude
+                    )
+                }
+            }
         }
     }
 }

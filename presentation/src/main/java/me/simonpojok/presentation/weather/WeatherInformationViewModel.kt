@@ -29,12 +29,7 @@ class WeatherInformationViewModel @Inject constructor(
 ) {
     override fun initialState() = WeatherInformationViewState()
 
-    override fun onFragmentViewCreated() {
-        onGetWeatherInformationAction(lat = 1.3733, lon = 32.2903)
-        onGetWeeklyAreaWeatherForecast(lat = 1.3733, lon = 32.2903)
-    }
-
-    private fun onGetWeatherInformationAction(lon: Double, lat: Double) {
+    fun onGetWeatherInformationAction(lon: Double, lat: Double) {
         updateState { lastState ->
             lastState.copy(
                 isLoading = true
@@ -51,7 +46,7 @@ class WeatherInformationViewModel @Inject constructor(
         )
     }
 
-    private fun onGetWeeklyAreaWeatherForecast(lon: Double, lat: Double) {
+    fun onGetWeeklyAreaWeatherForecast(lon: Double, lat: Double) {
         useCaseExecutor.execute(
             value = CoordinateDomainModel(lon, lat),
             useCase = getWeeklyAreaWeatherForecastUseCase,

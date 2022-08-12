@@ -2,6 +2,8 @@ package me.simonpojok.weatherapp.di.weather
 
 import android.content.Context
 import android.content.res.Resources
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,4 +60,11 @@ object WeatherUiModule {
         resources,
         weatherIconToConditionMapper
     )
+
+    @Provides
+    fun providesFusedLocationProviderClient(@ApplicationContext appContext: Context) =
+        LocationServices.getFusedLocationProviderClient(appContext)
+
+    @Provides
+    fun providesCancellationTokenSource() = CancellationTokenSource()
 }
