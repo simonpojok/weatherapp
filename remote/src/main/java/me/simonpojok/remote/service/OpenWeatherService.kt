@@ -1,6 +1,7 @@
 package me.simonpojok.remote.service
 
 import me.simonpojok.data.weather.model.AreaWeatherConditionDataModel
+import me.simonpojok.remote.weather.model.AreaWeatherConditionRemoteModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -10,5 +11,5 @@ interface OpenWeatherService {
         @Path("lat") lat: Int,
         @Path("lon") log: Int,
         @Path("apiKey") apiKey: String
-    ): AreaWeatherConditionDataModel
+    ): AreaWeatherConditionRemoteModel
 }

@@ -7,15 +7,15 @@ import me.simonpojok.domain.weather.model.WeatherDomainModel
 import me.simonpojok.domain.weather.model.WindDomainModel
 
 data class AreaWeatherConditionDataModel(
-    val coord: CoordinateDomainModel,
-    val weather: WeatherDomainModel,
+    val coord: CoordinateDataModel,
+    val weather: WeatherDataModel,
     val base: String,
-    val main: WeatherBreakDownDomainModel,
+    val main: WeatherBreakDownDataModel,
     val visibility: Long,
-    val wind: WindDomainModel,
-    val clouds: CloudsDomainModel,
+    val wind: WindDataModel,
+    val clouds: CloudsDataModel,
     val dt: Long,
-    val sys: SystemDomainModel,
+    val sys: SystemDataModel,
     val timezone: Long,
     val id: Long,
     val name: String,

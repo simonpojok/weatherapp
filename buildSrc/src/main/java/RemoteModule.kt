@@ -6,7 +6,8 @@ object RemoteModule {
 
     // Test
     private const val junitJunit = "junit:junit:${Versions.junitJunit}"
-    private const val mockitoCore = "org.mockito:mockito-core:${Versions.mockitoCore}"
+    private const val mockitoCore = "org.mockito:mockito-inline:4.4.0"
+    private const val mockitoInline = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
     val remoteImplementationLibraries = arrayListOf<String>().apply {
         add(kotlinStandardLib)
@@ -18,6 +19,7 @@ object RemoteModule {
     val remoteTestImplementationLibraries = arrayListOf<String>().apply {
         add(junitJunit)
         add(mockitoCore)
+        add(mockitoInline)
     }
 
 }

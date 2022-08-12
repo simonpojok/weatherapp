@@ -5,5 +5,3 @@ data class WindRemoteModel(
     val deg: Int,
     val gust: Double
 )
-
-var name: CoordinateDataModel()

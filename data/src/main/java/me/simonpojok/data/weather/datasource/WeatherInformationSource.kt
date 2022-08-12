@@ -1,8 +1,8 @@
 package me.simonpojok.data.weather.datasource
 
 import me.simonpojok.data.weather.model.AreaWeatherConditionDataModel
-//import me.simonpojok.remote.weather.model.CoordinateApiModel
+import me.simonpojok.data.weather.model.CoordinateDataModel
 
 interface WeatherInformationSource {
-//    suspend fun getAreaWeatherInformation(coordinate: me.simonpojok.remote.weather.model.CoordinateApiModel): AreaWeatherConditionDataModel
+    suspend fun getAreaWeatherInformation(coordinate: CoordinateDataModel): AreaWeatherConditionDataModel
 }
