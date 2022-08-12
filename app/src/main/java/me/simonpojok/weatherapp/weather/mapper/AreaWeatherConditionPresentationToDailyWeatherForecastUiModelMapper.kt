@@ -39,7 +39,7 @@ class AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
     }
 
     private fun Long.dayOfWeek(): String {
-        val stamp = Timestamp(this)
+        val stamp = Timestamp(System.currentTimeMillis() + this)
         val date = Date(stamp.time)
         val sdf = SimpleDateFormat("EEEE", Locale.getDefault())
         return sdf.format(date)!!
