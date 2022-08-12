@@ -8,20 +8,19 @@ import me.simonpojok.domain.weather.model.AreaWeatherConditionDomainModel
 import me.simonpojok.domain.weather.model.CoordinateDomainModel
 import me.simonpojok.domain.weather.repository.AreaWeatherInformationRepository
 
-interface GetAreaWeatherInformationUseCase :
-    BaseUseCase<CoordinateDomainModel, AreaWeatherConditionDomainModel>
+interface GetWeeklyAreaWeatherForecastUseCase :
+    BaseUseCase<CoordinateDomainModel, List<AreaWeatherConditionDomainModel>>
 
-class GetAreaWeatherInformationUseCaseImpl(
+class GetWeeklyAreaWeatherForecastUseCaseImp(
     private val areaWeatherInformationRepository: AreaWeatherInformationRepository,
     coroutineContextProvider: CoroutineContextProvider
-) : GetAreaWeatherInformationUseCase,
-    BackgroundExecuteUseCase<CoordinateDomainModel, AreaWeatherConditionDomainModel>(
+) : GetWeeklyAreaWeatherForecastUseCase,
+    BackgroundExecuteUseCase<CoordinateDomainModel, List<AreaWeatherConditionDomainModel>>(
         coroutineContextProvider
     ) {
     override suspend fun executeInBackground(
         request: CoordinateDomainModel,
         coroutineScope: CoroutineScope
-    ): AreaWeatherConditionDomainModel {
-        return areaWeatherInformationRepository.getAreaWeatherCondition(request)
-    }
+    ): List<AreaWeatherConditionDomainModel> =
+        areaWeatherInformationRepository.getWeeklyAreaWeatherForecast(request)
 }

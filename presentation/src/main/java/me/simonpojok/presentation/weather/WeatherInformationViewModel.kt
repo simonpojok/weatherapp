@@ -4,18 +4,22 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import me.simonpojok.domain.weather.model.AreaWeatherConditionDomainModel
 import me.simonpojok.domain.weather.model.CoordinateDomainModel
 import me.simonpojok.domain.weather.usecase.GetAreaWeatherInformationUseCase
+import me.simonpojok.domain.weather.usecase.GetWeeklyAreaWeatherForecastUseCase
 import me.simonpojok.presentation.common.BaseViewModel
 import me.simonpojok.presentation.common.DialogCommand
 import me.simonpojok.presentation.common.internal.GeneralDomainToPresentationExceptionMapper
 import me.simonpojok.presentation.common.usecaseexecutor.UseCaseExecutorProvider
+import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherBreakDownDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherDomainToWeatherPresentationModelMapper
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherInformationViewModel @Inject constructor(
+    private val areaWeatherConditionMapper: AreaWeatherConditionDomainToPresentationModelMapper,
     private val weatherDomainToWeatherPresentationModelMapper: WeatherDomainToWeatherPresentationModelMapper,
     private val weatherBreakDownDomainToPresentationModelMapper: WeatherBreakDownDomainToPresentationModelMapper,
+    private val getWeeklyAreaWeatherForecastUseCase: GetWeeklyAreaWeatherForecastUseCase,
     private val getAreaWeatherInformationUseCase: GetAreaWeatherInformationUseCase,
     generalDomainToPresentationExceptionMapper: GeneralDomainToPresentationExceptionMapper,
     useCaseExecutorProvider: UseCaseExecutorProvider
@@ -27,6 +31,7 @@ class WeatherInformationViewModel @Inject constructor(
 
     override fun onFragmentViewCreated() {
         onGetWeatherInformationAction(lat = 1.3733, lon = 32.2903)
+        onGetWeeklyAreaWeatherForecast(lat = 1.3733, lon = 32.2903)
     }
 
     private fun onGetWeatherInformationAction(lon: Double, lat: Double) {
@@ -44,6 +49,26 @@ class WeatherInformationViewModel @Inject constructor(
                 print(error.toString())
             }
         )
+    }
+
+    private fun onGetWeeklyAreaWeatherForecast(lon: Double, lat: Double) {
+        useCaseExecutor.execute(
+            value = CoordinateDomainModel(lon, lat),
+            useCase = getWeeklyAreaWeatherForecastUseCase,
+            callback = ::updateWeeklyAreaWeatherForecastState,
+            onError = { error ->
+                print(error.toString())
+            }
+        )
+    }
+
+    private fun updateWeeklyAreaWeatherForecastState(forcasts: List<AreaWeatherConditionDomainModel>) {
+        val forecastPresentations = forcasts.map(areaWeatherConditionMapper::toPresentation)
+        updateState { lastState ->
+            lastState.copy(
+                forcasts = forecastPresentations
+            )
+        }
     }
 
     private fun updateWeatherInformationState(weatherInformation: AreaWeatherConditionDomainModel) {

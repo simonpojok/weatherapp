@@ -1,8 +1,13 @@
 package me.simonpojok.weatherapp.weather
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import me.simonpojok.presentation.common.DialogCommand
 import me.simonpojok.presentation.weather.WeatherInformationViewModel
@@ -11,10 +16,13 @@ import me.simonpojok.presentation.weather.model.WeatherBreakDownPresentationMode
 import me.simonpojok.presentation.weather.model.WeatherPresentationModel
 import me.simonpojok.weatherapp.R
 import me.simonpojok.weatherapp.common.BaseFragment
+import me.simonpojok.weatherapp.common.ItemsListAdapter
+import me.simonpojok.weatherapp.weather.mapper.AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherBreakDownPresentationToUIModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToWeatherResourceUiModelMapper
 import me.simonpojok.weatherapp.weather.model.WeatherResourceUiModel
+import me.simonpojok.weatherapp.weather.widgets.DailyWeatherForecastViewHolder
 import me.simonpojok.weatherapp.weather.widgets.WeatherBreakDownView
 import me.simonpojok.weatherapp.weather.widgets.WeatherConditionView
 import javax.inject.Inject
@@ -27,6 +35,7 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
     private val weatherImageView: ImageView get() = requireView().findViewById(R.id.weather_information_representation_image)
     private val weatherConditionView: WeatherConditionView get() = requireView().findViewById(R.id.weather_information_condition)
     private val weatherBreakDownView: WeatherBreakDownView get() = requireView().findViewById(R.id.weather_information_break_down_statistics)
+    private val forecastRecyclerView: RecyclerView get() = requireView().findViewById(R.id.weather_information_weekly_statistics_list)
 
     @Inject
     override lateinit var destinationMapper: WeatherInformationUiDestinationMapper
@@ -42,6 +51,21 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
     @Inject
     lateinit var weatherPresentationToUiModelMapper: WeatherPresentationToUiModelMapper
 
+    @Inject
+    lateinit var dailyWeatherForecastUiModelMapper: AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper
+
+    private val forcastAdapter = ItemsListAdapter { parent, _ ->
+        DailyWeatherForecastViewHolder(
+            itemView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.view_daily_weather_forcast_item, parent, false)
+        )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        forecastRecyclerView.adapter = forcastAdapter
+    }
+
     override fun renderViewState(viewState: WeatherInformationViewState) {
         super.renderViewState(viewState)
 
@@ -49,6 +73,8 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
         renderBackgroundResources(viewState.weather)
         renderWeatherStatisics(viewState.weather)
         renderWeatherBreakdown(viewState.weatherBreakDown)
+
+        forcastAdapter.setAdapterItems(viewState.forcasts.map(dailyWeatherForecastUiModelMapper::toUi))
     }
 
     private fun renderWeatherBreakdown(weatherBreakDown: WeatherBreakDownPresentationModel) {

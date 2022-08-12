@@ -1,6 +1,5 @@
 package me.simonpojok.weatherapp.di.weather
 
-import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import dagger.Module
@@ -10,6 +9,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import me.simonpojok.weatherapp.navigation.GlobalDestinationMapper
 import me.simonpojok.weatherapp.weather.WeatherInformationUiDestinationMapper
+import me.simonpojok.weatherapp.weather.mapper.AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherBreakDownPresentationToUIModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherIconToConditionMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToUiModelMapper
@@ -49,4 +49,13 @@ object WeatherUiModule {
     fun providesWeatherPresentationToWeatherResourceUiModelMapper(
         weatherIconToConditionMapper: WeatherIconToConditionMapper
     ) = WeatherPresentationToWeatherResourceUiModelMapper(weatherIconToConditionMapper)
+
+    @Provides
+    fun providesAreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
+        resources: Resources,
+        weatherIconToConditionMapper: WeatherIconToConditionMapper
+    ) = AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
+        resources,
+        weatherIconToConditionMapper
+    )
 }

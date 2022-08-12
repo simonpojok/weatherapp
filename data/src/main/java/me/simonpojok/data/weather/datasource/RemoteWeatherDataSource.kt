@@ -7,4 +7,6 @@ interface RemoteWeatherDataSource {
     suspend fun getAreaWeatherInformation(
         coord: CoordinateDataModel
     ): AreaWeatherConditionDataModel
+
+    suspend fun getWeeklyAreaWeatherForcasts(coord: CoordinateDataModel): List<AreaWeatherConditionDataModel>
 }

@@ -8,7 +8,10 @@ import me.simonpojok.domain.common.usecase.CoroutineContextProvider
 import me.simonpojok.domain.weather.repository.AreaWeatherInformationRepository
 import me.simonpojok.domain.weather.usecase.GetAreaWeatherInformationUseCase
 import me.simonpojok.domain.weather.usecase.GetAreaWeatherInformationUseCaseImpl
+import me.simonpojok.domain.weather.usecase.GetWeeklyAreaWeatherForecastUseCase
+import me.simonpojok.domain.weather.usecase.GetWeeklyAreaWeatherForecastUseCaseImp
 import me.simonpojok.presentation.common.internal.GeneralDomainToPresentationExceptionMapper
+import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherBreakDownDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherDomainToWeatherPresentationModelMapper
 
@@ -29,10 +32,28 @@ object WeatherPresentationModule {
     )
 
     @Provides
+    fun providesGetWeeklyAreaWeatherForecastUseCase(
+        areaWeatherInformationRepository: AreaWeatherInformationRepository,
+        coroutineContextProvider: CoroutineContextProvider
+    ): GetWeeklyAreaWeatherForecastUseCase = GetWeeklyAreaWeatherForecastUseCaseImp(
+        areaWeatherInformationRepository,
+        coroutineContextProvider
+    )
+
+    @Provides
     fun providesWeatherDomainToWeatherPresentationModelMapper() =
         WeatherDomainToWeatherPresentationModelMapper()
 
     @Provides
     fun providesWeatherBreakDownDomainToPresentationModelMapper() =
         WeatherBreakDownDomainToPresentationModelMapper()
+
+    @Provides
+    fun providesAreaWeatherConditionDomainToPresentationModelMapper(
+        weatherDomainMapper: WeatherDomainToWeatherPresentationModelMapper,
+        weatherBreakDownMapper: WeatherBreakDownDomainToPresentationModelMapper,
+    ) = AreaWeatherConditionDomainToPresentationModelMapper(
+        weatherDomainMapper,
+        weatherBreakDownMapper
+    )
 }

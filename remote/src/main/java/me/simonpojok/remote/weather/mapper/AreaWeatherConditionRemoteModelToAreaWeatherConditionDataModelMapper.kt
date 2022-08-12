@@ -10,6 +10,7 @@ class AreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper(
 ) : RemoteToDataMapper<AreaWeatherConditionRemoteModel, AreaWeatherConditionDataModel>() {
     override fun map(input: AreaWeatherConditionRemoteModel) = AreaWeatherConditionDataModel(
         weather = input.weather.map(weatherRemoteMapper::toData),
-        main = weatherBreakDataMapper.toData(input.main)
+        main = weatherBreakDataMapper.toData(input.main),
+        timestamp = input.dt
     )
 }

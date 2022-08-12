@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1155" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2826086956521739" />
         <entry key="app/src/main/res/layout/fragment_weather_information.xml" value="0.2826086956521739" />
+        <entry key="app/src/main/res/layout/view_daily_weather_forcast_item.xml" value="0.26856884057971014" />
         <entry key="app/src/main/res/layout/view_weather_break_down.xml" value="0.2826086956521739" />
         <entry key="app/src/main/res/layout/view_weather_condition.xml" value="0.2826086956521739" />
       </map>
