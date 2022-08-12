@@ -37,12 +37,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
-    }
+
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -64,7 +59,8 @@ dependencies {
     implementation(project(":presentation"))
 
     implementation(UiModule.uiImplementationLibraries)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation(project(mapOf("path" to ":domain")))
     kapt(UiModule.uiKaptImplementationLibraries)
-    androidTestImplementation(UiModule.uiAndroidTestImplementationLibraries)
     testImplementation(UiModule.uiTestImplementationLibraries)
 }

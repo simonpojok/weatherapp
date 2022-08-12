@@ -31,7 +31,6 @@ object UiModule {
     private const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
 
     // Kapt
-    private const val roomCompiler = "androidx.room:room-compiler:2.4.1"
     private const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0"
     private const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.4.0"
     private const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltAndroidCompiler}"
@@ -71,7 +70,6 @@ object UiModule {
 
     val uiKaptImplementationLibraries = arrayListOf<String>().apply {
         add(hiltAndroidCompiler)
-        add(roomCompiler)
         add(hiltCompiler)
         add(lifecycleCompiler)
     }

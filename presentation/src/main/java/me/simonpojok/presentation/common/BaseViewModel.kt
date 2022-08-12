@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
+import me.simonpojok.domain.common.usecase.UseCaseExecutor
 import me.simonpojok.presentation.common.exception.DomainException
 import me.simonpojok.presentation.common.exception.PresentationException
 import me.simonpojok.presentation.common.mappers.DomainToPresentationMapper
@@ -25,8 +27,8 @@ abstract class BaseViewModel<VIEW_STATE : ViewState, DIALOG_COMMAND : DialogComm
         get() = _viewState
 
     val dialogEvents = SingleLiveEvent<DIALOG_COMMAND>()
-//    val useCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(viewModelScope)
-//    val globalUseCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(GlobalScope)
+    val useCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(viewModelScope)
+    val globalUseCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(GlobalScope)
 
     fun notify(dialogCommand: DIALOG_COMMAND) {
         dialogEvents.value = dialogCommand
