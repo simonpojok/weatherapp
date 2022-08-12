@@ -3,6 +3,8 @@ package me.simonpojok.presentation.common.mappers
 class PresentationMapperException(message: String, throwable: Throwable? = null) :
     Exception(message, throwable)
 
+class UiMapperException(message: String, throwable: Throwable?) : Exception(message, throwable)
+
 abstract class DomainToPresentationMapper<INPUT : Any, OUTPUT : Any> {
 
     fun toPresentation(input: INPUT): OUTPUT = try {

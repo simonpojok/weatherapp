@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/sunny"
     tools:context=".weather.WeatherInformationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/weather_information_representation_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/forest_sunny"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <me.simonpojok.weatherapp.weather.widgets.WeatherConditionView
+        android:id="@+id/weather_information_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/weather_information_representation_image"
+        app:layout_constraintEnd_toEndOf="@id/weather_information_representation_image"
+        app:layout_constraintStart_toStartOf="@id/weather_information_representation_image"
+        app:layout_constraintTop_toTopOf="@id/weather_information_representation_image"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <me.simonpojok.weatherapp.weather.widgets.WeatherBreakDownView
+        android:id="@+id/weather_information_break_down_statistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/weather_information_representation_image"
+        app:layout_constraintStart_toStartOf="@id/weather_information_representation_image"
+        app:layout_constraintTop_toBottomOf="@id/weather_information_representation_image" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weather_information_weekly_statistics_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/weather_information_representation_image"
+        app:layout_constraintStart_toStartOf="@id/weather_information_representation_image"
+        app:layout_constraintTop_toBottomOf="@id/weather_information_break_down_statistics" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

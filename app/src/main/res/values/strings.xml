@@ -2,4 +2,12 @@
     <string name="app_name">WeatherApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_weather_break_down_min_label">min</string>
+    <string name="view_weather_break_down_max_label">max</string>
+    <string name="view_weather_break_down_current_label">Current</string>
+    <string name="weather_information_condition_sunny_label">Sunny</string>
+    <string name="weather_information_condition_rainy_label">Rainy</string>
+    <string name="weather_information_condition_cloudy_label">Cloudy</string>
+
+    <string name="degree_label">%s°</string>
 </resources>
