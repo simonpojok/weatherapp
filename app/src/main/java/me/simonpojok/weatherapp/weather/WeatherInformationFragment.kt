@@ -1,15 +1,13 @@
 package me.simonpojok.weatherapp.weather
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import me.simonpojok.presentation.common.DialogCommand
 import me.simonpojok.presentation.weather.WeatherInformationViewModel
 import me.simonpojok.presentation.weather.WeatherInformationViewState
+import me.simonpojok.presentation.weather.model.WeatherBreakDownPresentationModel
 import me.simonpojok.presentation.weather.model.WeatherPresentationModel
 import me.simonpojok.weatherapp.R
 import me.simonpojok.weatherapp.common.BaseFragment
@@ -17,6 +15,8 @@ import me.simonpojok.weatherapp.weather.mapper.WeatherBreakDownPresentationToUIM
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToWeatherResourceUiModelMapper
 import me.simonpojok.weatherapp.weather.model.WeatherResourceUiModel
+import me.simonpojok.weatherapp.weather.widgets.WeatherBreakDownView
+import me.simonpojok.weatherapp.weather.widgets.WeatherConditionView
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,6 +25,8 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
 
     private val backgroundView: View get() = requireView().findViewById(R.id.weather_information_background)
     private val weatherImageView: ImageView get() = requireView().findViewById(R.id.weather_information_representation_image)
+    private val weatherConditionView: WeatherConditionView get() = requireView().findViewById(R.id.weather_information_condition)
+    private val weatherBreakDownView: WeatherBreakDownView get() = requireView().findViewById(R.id.weather_information_break_down_statistics)
 
     @Inject
     override lateinit var destinationMapper: WeatherInformationUiDestinationMapper
@@ -45,6 +47,18 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
 
 
         renderBackgroundResources(viewState.weather)
+        renderWeatherStatisics(viewState.weather)
+        renderWeatherBreakdown(viewState.weatherBreakDown)
+    }
+
+    private fun renderWeatherBreakdown(weatherBreakDown: WeatherBreakDownPresentationModel) {
+        val weatherBreakDownUi = weatherBreakDownPresentationToUIModelMapper.toUi(weatherBreakDown)
+        weatherBreakDownView.setWeatherBreakDown(weatherBreakDownUi)
+    }
+
+    private fun renderWeatherStatisics(weather: WeatherPresentationModel) {
+        val statistics = weatherPresentationToUiModelMapper.toUi(weather)
+        weatherConditionView.setWeatherBreakDown(statistics)
     }
 
     private fun renderBackgroundResources(weather: WeatherPresentationModel) {

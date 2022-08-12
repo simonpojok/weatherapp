@@ -20,8 +20,9 @@
 
     <me.simonpojok.weatherapp.weather.widgets.WeatherConditionView
         android:id="@+id/weather_information_condition"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="@id/weather_information_representation_image"
         app:layout_constraintEnd_toEndOf="@id/weather_information_representation_image"
         app:layout_constraintStart_toStartOf="@id/weather_information_representation_image"
