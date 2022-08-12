@@ -61,6 +61,9 @@ dependencies {
     implementation(UiModule.uiImplementationLibraries)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":data")))
+    implementation(project(mapOf("path" to ":remote")))
+    implementation(project(mapOf("path" to ":authentication")))
     kapt(UiModule.uiKaptImplementationLibraries)
     testImplementation(UiModule.uiTestImplementationLibraries)
 }
