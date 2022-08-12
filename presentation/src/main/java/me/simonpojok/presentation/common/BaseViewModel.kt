@@ -27,6 +27,7 @@ abstract class BaseViewModel<VIEW_STATE : ViewState, DIALOG_COMMAND : DialogComm
         get() = _viewState
 
     val dialogEvents = SingleLiveEvent<DIALOG_COMMAND>()
+    val dialogLoadingState = MutableLiveData(false)
     val useCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(viewModelScope)
     val globalUseCaseExecutor: UseCaseExecutor = useCaseExecutorProvider(GlobalScope)
 
@@ -76,6 +77,10 @@ abstract class BaseViewModel<VIEW_STATE : ViewState, DIALOG_COMMAND : DialogComm
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel("Scope cleared")
+    }
+
+    protected fun setLoading(state: Boolean) {
+        dialogLoadingState.value = state
     }
 }
 

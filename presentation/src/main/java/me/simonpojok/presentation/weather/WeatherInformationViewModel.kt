@@ -30,6 +30,7 @@ class WeatherInformationViewModel @Inject constructor(
     override fun initialState() = WeatherInformationViewState()
 
     fun onGetWeatherInformationAction(lon: Double, lat: Double) {
+        setLoading(true)
         updateState { lastState ->
             lastState.copy(
                 isLoading = true
@@ -47,6 +48,7 @@ class WeatherInformationViewModel @Inject constructor(
     }
 
     fun onGetWeeklyAreaWeatherForecast(lon: Double, lat: Double) {
+        setLoading(true)
         useCaseExecutor.execute(
             value = CoordinateDomainModel(lon, lat),
             useCase = getWeeklyAreaWeatherForecastUseCase,
@@ -58,6 +60,7 @@ class WeatherInformationViewModel @Inject constructor(
     }
 
     private fun updateWeeklyAreaWeatherForecastState(forcasts: List<AreaWeatherConditionDomainModel>) {
+        setLoading(false)
         updateState { lastState ->
             lastState.copy(
                 forcasts = weeklyAreaWeatherDomainMapper.toPresentation(forcasts)
@@ -66,6 +69,7 @@ class WeatherInformationViewModel @Inject constructor(
     }
 
     private fun updateWeatherInformationState(weatherInformation: AreaWeatherConditionDomainModel) {
+        setLoading(false)
         weatherDomainToWeatherPresentationModelMapper.temperature = weatherInformation.main.temp_max
 
         updateState { lastState ->
