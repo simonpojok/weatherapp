@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.checkSelfPermission
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,8 @@ import me.simonpojok.weatherapp.weather.widgets.DailyWeatherForecastViewHolder
 import me.simonpojok.weatherapp.weather.widgets.WeatherBreakDownView
 import me.simonpojok.weatherapp.weather.widgets.WeatherConditionView
 import javax.inject.Inject
+
+private const val LOCATION_PERMISSIONS_REQUEST_CODE = 787
 
 @AndroidEntryPoint
 class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, DialogCommand>() {
@@ -77,6 +81,14 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
         super.onViewCreated(view, savedInstanceState)
         forecastRecyclerView.adapter = forcastAdapter
         requestCurrentLocationAndLoadData()
+
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                requestCurrentLocationAndLoadData()
+            }
+        }.launch(ACCESS_FINE_LOCATION)
     }
 
     override fun renderViewState(viewState: WeatherInformationViewState) {
@@ -128,6 +140,26 @@ class WeatherInformationFragment : BaseFragment<WeatherInformationViewState, Dia
                     )
                 }
             }
+        } else {
+            requestPermissions()
         }
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                ACCESS_FINE_LOCATION,
+            ),
+            LOCATION_PERMISSIONS_REQUEST_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }
