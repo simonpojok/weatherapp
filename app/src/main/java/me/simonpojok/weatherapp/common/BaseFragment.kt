@@ -48,6 +48,7 @@ abstract class BaseFragment<VIEW_STATE : ViewState, DIALOG_COMMAND : DialogComma
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModelInternal()
         viewModel.onFragmentViewCreated()
     }
 

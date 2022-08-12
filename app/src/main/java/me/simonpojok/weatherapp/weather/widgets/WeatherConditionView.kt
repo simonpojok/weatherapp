@@ -20,7 +20,9 @@ class WeatherConditionView @JvmOverloads constructor(
     }
 
     fun setWeatherBreakDown(weather: WeatherUiModel) {
-        currentTemperatureView.text = weather.temperature
-        currentConditionView.text = weather.condition
+        if (weather is WeatherUiModel.Result) {
+            currentTemperatureView.text = weather.temperature
+            currentConditionView.text = weather.condition
+        }
     }
 }

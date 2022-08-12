@@ -5,6 +5,7 @@ import me.simonpojok.presentation.weather.model.WeatherBreakDownPresentationMode
 import me.simonpojok.presentation.weather.model.WeatherPresentationModel
 
 data class WeatherInformationViewState(
+    val isLoading: Boolean = false,
     val weatherBreakDown: WeatherBreakDownPresentationModel = WeatherBreakDownPresentationModel.Empty,
     val weather: WeatherPresentationModel = WeatherPresentationModel.Empty
 ) : ViewState

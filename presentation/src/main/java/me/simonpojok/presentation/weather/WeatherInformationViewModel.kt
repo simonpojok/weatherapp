@@ -16,4 +16,12 @@ class WeatherInformationViewModel @Inject constructor(
     exceptionDomainToPresentationMapper = generalDomainToPresentationExceptionMapper
 ) {
     override fun initialState() = WeatherInformationViewState()
+
+    override fun onFragmentViewCreated() {
+        updateState { lastState ->
+            lastState.copy(
+                isLoading = true
+            )
+        }
+    }
 }

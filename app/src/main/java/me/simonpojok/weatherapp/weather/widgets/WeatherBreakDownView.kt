@@ -21,8 +21,10 @@ class WeatherBreakDownView @JvmOverloads constructor(
     }
 
     fun setWeatherBreakDown(breakdown: WeatherBreakDownUiModel) {
-        minTemperatureView.text = breakdown.minTemperature
-        currentTemperatureView.text = breakdown.currentTemperature
-        maxTemperatureView.text = breakdown.maxTemperature
+        if (breakdown is WeatherBreakDownUiModel.Result) {
+            minTemperatureView.text = breakdown.minTemperature
+            currentTemperatureView.text = breakdown.currentTemperature
+            maxTemperatureView.text = breakdown.maxTemperature
+        }
     }
 }
