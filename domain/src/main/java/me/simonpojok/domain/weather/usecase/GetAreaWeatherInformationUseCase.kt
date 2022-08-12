@@ -21,5 +21,7 @@ class GetAreaWeatherInformationUseCaseImpl(
     override suspend fun executeInBackground(
         request: CoordinateDomainModel,
         coroutineScope: CoroutineScope
-    ) = areaWeatherInformationRepository.getAreaWeatherCondition(request)
+    ): AreaWeatherConditionDomainModel {
+        return areaWeatherInformationRepository.getAreaWeatherCondition(request)
+    }
 }

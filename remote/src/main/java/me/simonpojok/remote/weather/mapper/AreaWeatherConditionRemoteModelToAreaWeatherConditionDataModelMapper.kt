@@ -4,7 +4,7 @@ import me.simonpojok.data.weather.model.AreaWeatherConditionDataModel
 import me.simonpojok.remote.common.mapper.RemoteToDataMapper
 import me.simonpojok.remote.weather.model.AreaWeatherConditionRemoteModel
 
-class AreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper(
+class AreaWeatherConditionRemoteModelToAreaWeatherConditionDataModelMapper (
     private val coordinateRemoteMapper: CoordinateRemoteModelToCoordinateDataMapper,
     private val weatherRemoteMapper: WeatherRemoteModelToWeatherDataModelMapper,
     private val weatherBreakDataMapper: WeatherBreakDownRemoteModelToWeatherBreakDownDataMapper,

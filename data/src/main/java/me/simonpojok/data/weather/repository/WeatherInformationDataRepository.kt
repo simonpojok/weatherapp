@@ -1,6 +1,5 @@
 package me.simonpojok.data.weather.repository
 
-import me.simonpojok.authentication.AuthenticationKeyProvider
 import me.simonpojok.data.weather.datasource.RemoteWeatherDataSource
 import me.simonpojok.data.weather.mapper.AreaWeatherConditionDataToAreaWeatherConditionDomainModelMapper
 import me.simonpojok.data.weather.mapper.CoordinateDomainToCoordinateRemoteModelMapper
@@ -15,6 +14,7 @@ class WeatherInformationDataRepository(
     private val areaWeatherConditionDomainMapper: AreaWeatherConditionDataToAreaWeatherConditionDomainModelMapper
 ) : AreaWeatherInformationRepository {
     override suspend fun getAreaWeatherCondition(coordinateDomainModel: CoordinateDomainModel): AreaWeatherConditionDomainModel {
+        print("Calling .........................................................")
         return remoteWeatherDataSource.getAreaWeatherInformation(
             coordinateRemoteModelMapper.toData(coordinateDomainModel)
         ).toDomain()
