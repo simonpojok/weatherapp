@@ -9,14 +9,14 @@ import me.simonpojok.presentation.common.BaseViewModel
 import me.simonpojok.presentation.common.DialogCommand
 import me.simonpojok.presentation.common.internal.GeneralDomainToPresentationExceptionMapper
 import me.simonpojok.presentation.common.usecaseexecutor.UseCaseExecutorProvider
-import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToPresentationModelMapper
+import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToWeeklyAreaWeatherModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherBreakDownDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherDomainToWeatherPresentationModelMapper
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherInformationViewModel @Inject constructor(
-    private val areaWeatherConditionMapper: AreaWeatherConditionDomainToPresentationModelMapper,
+    private val weeklyAreaWeatherDomainMapper: AreaWeatherConditionDomainToWeeklyAreaWeatherModelMapper,
     private val weatherDomainToWeatherPresentationModelMapper: WeatherDomainToWeatherPresentationModelMapper,
     private val weatherBreakDownDomainToPresentationModelMapper: WeatherBreakDownDomainToPresentationModelMapper,
     private val getWeeklyAreaWeatherForecastUseCase: GetWeeklyAreaWeatherForecastUseCase,
@@ -63,10 +63,9 @@ class WeatherInformationViewModel @Inject constructor(
     }
 
     private fun updateWeeklyAreaWeatherForecastState(forcasts: List<AreaWeatherConditionDomainModel>) {
-        val forecastPresentations = forcasts.map(areaWeatherConditionMapper::toPresentation)
         updateState { lastState ->
             lastState.copy(
-                forcasts = forecastPresentations
+                forcasts = weeklyAreaWeatherDomainMapper.toPresentation(forcasts)
             )
         }
     }

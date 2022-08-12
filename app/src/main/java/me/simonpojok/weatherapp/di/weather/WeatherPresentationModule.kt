@@ -12,6 +12,7 @@ import me.simonpojok.domain.weather.usecase.GetWeeklyAreaWeatherForecastUseCase
 import me.simonpojok.domain.weather.usecase.GetWeeklyAreaWeatherForecastUseCaseImp
 import me.simonpojok.presentation.common.internal.GeneralDomainToPresentationExceptionMapper
 import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToPresentationModelMapper
+import me.simonpojok.presentation.weather.mapper.AreaWeatherConditionDomainToWeeklyAreaWeatherModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherBreakDownDomainToPresentationModelMapper
 import me.simonpojok.presentation.weather.mapper.WeatherDomainToWeatherPresentationModelMapper
 
@@ -56,4 +57,9 @@ object WeatherPresentationModule {
         weatherDomainMapper,
         weatherBreakDownMapper
     )
+
+    @Provides
+    fun providesAreaWeatherConditionDomainToWeeklyAreaWeatherModelMapper(
+        areaWeatherConditionMapper: AreaWeatherConditionDomainToPresentationModelMapper
+    ) = AreaWeatherConditionDomainToWeeklyAreaWeatherModelMapper(areaWeatherConditionMapper)
 }

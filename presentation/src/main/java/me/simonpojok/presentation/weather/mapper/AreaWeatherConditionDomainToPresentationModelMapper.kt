@@ -14,7 +14,8 @@ class AreaWeatherConditionDomainToPresentationModelMapper(
         return AreaWeatherConditionPresentationModel(
             timestamp = input.timestamp,
             weather = weatherDomainMapper.toPresentation(input.weather.first()),
-            weatherBreakDown = weatherBreakDownMapper.toPresentation(input.main)
+            weatherBreakDown = weatherBreakDownMapper.toPresentation(input.main),
+            dateTime = input.dateTime
         )
     }
 }

@@ -11,6 +11,7 @@ class AreaWeatherConditionDataToAreaWeatherConditionDomainModelMapper(
     override fun map(input: AreaWeatherConditionDataModel) = AreaWeatherConditionDomainModel(
         weather = input.weather.map(weatherDataModelToWeatherDomainModelMapper::toDomain),
         main = weatherBreakDownDataModelToWeatherBreakDownDomainMapper.toDomain(input.main),
-        timestamp = input.timestamp
+        timestamp = input.timestamp,
+        dateTime = input.dateTime
     )
 }
