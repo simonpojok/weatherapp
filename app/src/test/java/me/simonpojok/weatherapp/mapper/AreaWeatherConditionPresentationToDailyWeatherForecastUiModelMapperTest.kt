@@ -1,0 +1,4 @@
+package me.simonpojok.weatherapp.mapper
+
+class AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapperTest {
+}

@@ -14,6 +14,7 @@ import me.simonpojok.weatherapp.weather.WeatherInformationUiDestinationMapper
 import me.simonpojok.weatherapp.weather.mapper.AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.FahrenheitToCelsiusMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherBreakDownPresentationToUIModelMapper
+import me.simonpojok.weatherapp.weather.mapper.WeatherConditionsToDrawableResourceMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherIconToConditionMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToUiModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToWeatherResourceUiModelMapper
@@ -57,11 +58,13 @@ object WeatherUiModule {
     fun providesAreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
         resources: Resources,
         weatherIconToConditionMapper: WeatherIconToConditionMapper,
-        fahrenheitToCelsiusMapper: FahrenheitToCelsiusMapper
+        fahrenheitToCelsiusMapper: FahrenheitToCelsiusMapper,
+        weatherConditionsToDrawableResourceMapper: WeatherConditionsToDrawableResourceMapper
     ) = AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
         resources,
         weatherIconToConditionMapper,
-        fahrenheitToCelsiusMapper
+        fahrenheitToCelsiusMapper,
+        weatherConditionsToDrawableResourceMapper
     )
 
     @Provides
