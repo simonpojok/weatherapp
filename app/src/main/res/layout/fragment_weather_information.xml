@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="@id/weather_information_representation_image"
         app:layout_constraintStart_toStartOf="@id/weather_information_representation_image"
         app:layout_constraintTop_toTopOf="@id/weather_information_representation_image"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <me.simonpojok.weatherapp.weather.widgets.WeatherBreakDownView
         android:id="@+id/weather_information_break_down_statistics"

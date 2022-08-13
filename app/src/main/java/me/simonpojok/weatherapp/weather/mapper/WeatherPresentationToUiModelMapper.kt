@@ -9,6 +9,7 @@ import me.simonpojok.weatherapp.common.mapper.PresentationToUiMapper
 import me.simonpojok.weatherapp.common.toCelsius
 import me.simonpojok.weatherapp.weather.model.WeatherConditions
 import me.simonpojok.weatherapp.weather.model.WeatherUiModel
+import java.util.Locale
 
 class WeatherPresentationToUiModelMapper(
     private val resources: Resources,
@@ -22,6 +23,7 @@ class WeatherPresentationToUiModelMapper(
                 String.format("%.0f", input.temperature.toCelsius())
             ),
             condition = weatherIconToConditionMapper.map(input.icon).toLocalizedString()
+                .uppercase(Locale.getDefault())
         )
     }
 
