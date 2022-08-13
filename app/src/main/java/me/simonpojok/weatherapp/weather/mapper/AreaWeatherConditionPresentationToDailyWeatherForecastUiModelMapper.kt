@@ -6,17 +6,17 @@ import me.simonpojok.presentation.weather.model.WeatherBreakDownPresentationMode
 import me.simonpojok.presentation.weather.model.WeatherPresentationModel
 import me.simonpojok.weatherapp.R
 import me.simonpojok.weatherapp.common.mapper.PresentationToUiMapper
-import me.simonpojok.weatherapp.common.toCelsius
 import me.simonpojok.weatherapp.weather.model.DailyWeatherForecastUiModel
 import me.simonpojok.weatherapp.weather.model.WeatherConditions
 import me.simonpojok.weatherapp.weather.model.WeatherConditions.Rainy
 import me.simonpojok.weatherapp.weather.model.WeatherConditions.Sunny
 
-const val DEFAULT_ICON_NAME = "01d"
+const val DEFAULT_ICON_NAME = "02n"
 
 class AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
     private val resources: Resources,
-    private val weatherIconToConditionMapper: WeatherIconToConditionMapper
+    private val weatherIconToConditionMapper: WeatherIconToConditionMapper,
+    private val fahrenheitToCelsiusMapper: FahrenheitToCelsiusMapper
 ) :
     PresentationToUiMapper<AreaWeatherConditionPresentationModel, DailyWeatherForecastUiModel>() {
     override fun map(input: AreaWeatherConditionPresentationModel) = DailyWeatherForecastUiModel(
@@ -44,4 +44,6 @@ class AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
         is WeatherPresentationModel.Result -> this.icon
         else -> DEFAULT_ICON_NAME
     }
+
+    private fun Double.toCelsius() = fahrenheitToCelsiusMapper.toUi(this)
 }

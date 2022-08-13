@@ -12,6 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import me.simonpojok.weatherapp.navigation.GlobalDestinationMapper
 import me.simonpojok.weatherapp.weather.WeatherInformationUiDestinationMapper
 import me.simonpojok.weatherapp.weather.mapper.AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper
+import me.simonpojok.weatherapp.weather.mapper.FahrenheitToCelsiusMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherBreakDownPresentationToUIModelMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherIconToConditionMapper
 import me.simonpojok.weatherapp.weather.mapper.WeatherPresentationToUiModelMapper
@@ -55,10 +56,12 @@ object WeatherUiModule {
     @Provides
     fun providesAreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
         resources: Resources,
-        weatherIconToConditionMapper: WeatherIconToConditionMapper
+        weatherIconToConditionMapper: WeatherIconToConditionMapper,
+        fahrenheitToCelsiusMapper: FahrenheitToCelsiusMapper
     ) = AreaWeatherConditionPresentationToDailyWeatherForecastUiModelMapper(
         resources,
-        weatherIconToConditionMapper
+        weatherIconToConditionMapper,
+        fahrenheitToCelsiusMapper
     )
 
     @Provides
@@ -67,4 +70,7 @@ object WeatherUiModule {
 
     @Provides
     fun providesCancellationTokenSource() = CancellationTokenSource()
+
+    @Provides
+    fun providesFahrenheitToCelsiusMapper() = FahrenheitToCelsiusMapper()
 }
