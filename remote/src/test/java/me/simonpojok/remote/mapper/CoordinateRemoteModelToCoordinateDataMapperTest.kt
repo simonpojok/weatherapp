@@ -21,22 +21,22 @@ class CoordinateRemoteModelToCoordinateDataMapperTest(
         fun params() = listOf(
             arrayOf(
                 CoordinateRemoteModel(
-                    lon = 783,
-                    lat = 100
+                    lon = 783.0,
+                    lat = 100.0
                 ),
                 CoordinateDataModel(
-                    lon = 783,
-                    lat = 100
+                    lon = 783.0,
+                    lat = 100.0
                 )
             ),
             arrayOf(
                 CoordinateRemoteModel(
-                    lon = 7831,
-                    lat = 1001
+                    lon = 7831.0,
+                    lat = 1001.0
                 ),
                 CoordinateDataModel(
-                    lon = 7831,
-                    lat = 1001
+                    lon = 7831.0,
+                    lat = 1001.0
                 )
             )
         )
